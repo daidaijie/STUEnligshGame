@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">STUdyEnligshGame</string>
+
+    <!--url_string-->
+    <string name="login_url">http://10.21.29.148:5000/login</string>
+    
+    <!--login_info-->
+    <string name="login_success">Login success</string>
+    <string name="empty_data">username or password is empty</string>
+    <string name="login_error">Username or password is error</string>
+    <string name="no_internet">Your device don\'t connects to Internet </string>
+    <string name="server_error">Can\'t connect to the server</string>
+
 </resources>
