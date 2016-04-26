@@ -2,7 +2,9 @@ package com.stugame.main.stuenligshgame.view;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.stugame.main.stuenligshgame.R;
+import com.stugame.main.stuenligshgame.adapter.MainViewPaperAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,12 +31,25 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.nav_view)
     NavigationView navigationView;
 
+    @Bind(R.id.containerViewPager)
+    ViewPager containerViewPager;
+
+    @Bind(R.id.tabLayout)
+    TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setToolbar();
+
+        setTabAndPager();
+
+    }
+
+    private void setToolbar() {
 //      设置toolbar
         toolbar.setTitle(R.string.app_name);
 
@@ -54,6 +70,18 @@ public class MainActivity extends AppCompatActivity
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
         }
+    }
+
+    private void setTabAndPager() {
+//        为containerViewPager设置ViewPaperAdapter
+        containerViewPager.setAdapter(new MainViewPaperAdapter(getSupportFragmentManager()));
+
+//      设置tabLayout关联containerViewPager
+        tabLayout.setupWithViewPager(containerViewPager);
+
+//      修改两个Tab的文字
+        tabLayout.getTabAt(0).setText("Create Question");
+        tabLayout.getTabAt(1).setText("Answer Question");
     }
 
     @Override

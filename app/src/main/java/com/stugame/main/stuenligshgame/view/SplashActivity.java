@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
     private enum LoginState {
         LOGIN_SUCCESS,
         EMPTY_DATA,
-        Login_ERROR,
+        LOGIN_ERROR,
         NO_INTERNET,
         SERVER_ERROR,
     }
@@ -150,7 +150,7 @@ public class SplashActivity extends AppCompatActivity {
                 .post(body)
                 .build();
 
-//      用异步来进行网络请求，因为API23不允许直接在UI线程中进行网络操作
+//      用异步来进行网络请求，因为API 23不允许直接在UI线程中进行网络操作
         Client.client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -167,7 +167,7 @@ public class SplashActivity extends AppCompatActivity {
                     loginState = LoginState.LOGIN_SUCCESS;
                 } else if (state.equals("fail")) {
 //                  登录失败，账号密码错误
-                    loginState = LoginState.Login_ERROR;
+                    loginState = LoginState.LOGIN_ERROR;
                 } else {
 //                  服务器出现错误
                     loginState = LoginState.SERVER_ERROR;
@@ -181,7 +181,7 @@ public class SplashActivity extends AppCompatActivity {
         stateInfo = new HashMap<>();
         stateInfo.put(LoginState.LOGIN_SUCCESS, getString(R.string.login_success));
         stateInfo.put(LoginState.EMPTY_DATA, getString(R.string.empty_data));
-        stateInfo.put(LoginState.Login_ERROR, getString(R.string.login_error));
+        stateInfo.put(LoginState.LOGIN_ERROR, getString(R.string.login_error));
         stateInfo.put(LoginState.NO_INTERNET, getString(R.string.no_internet));
         stateInfo.put(LoginState.SERVER_ERROR, getString(R.string.server_error));
     }
