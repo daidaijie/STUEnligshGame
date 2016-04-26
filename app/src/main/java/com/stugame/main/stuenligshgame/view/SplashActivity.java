@@ -48,8 +48,8 @@ public class SplashActivity extends AppCompatActivity {
     /**
      * 登录状态及其信息
      */
-    private Map<LoginState, String> stateInfo;
     public LoginState loginState;
+    private Map<LoginState, String> stateInfo;
 
     private Handler myHandler = new Handler() {
         @Override
@@ -60,10 +60,12 @@ public class SplashActivity extends AppCompatActivity {
                 if (delay < 0) delay = 0;
 
                 //登录成功就进入主界面,否则进入登录界面
+                //此处要用post来执行更新UI的代码
                 if (loginState == LoginState.LOGIN_SUCCESS) {
                     myHandler.postDelayed(toMainActivity, delay);
                 } else {
                     Toast.makeText(SplashActivity.this, stateInfo.get(loginState), Toast.LENGTH_SHORT).show();
+                    myHandler.postDelayed(toLoginActivity, delay);
                 }
 
             }
@@ -77,10 +79,18 @@ public class SplashActivity extends AppCompatActivity {
         }
     };
 
+    Runnable toLoginActivity = new Runnable() {
+        @Override
+        public void run() {
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //设置全屏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -90,6 +100,7 @@ public class SplashActivity extends AppCompatActivity {
         //获取系统当前时间
         mStartTime = System.currentTimeMillis();
 
+        //初始化状态对应的信息
         initStateInfo();
 
         //从SharedPreferences中获取保存的用户名和密码
@@ -97,17 +108,20 @@ public class SplashActivity extends AppCompatActivity {
         UserData.setUsername(preferences.getString("username", ""));
         UserData.setPassword(preferences.getString("password", ""));
 
-        //Debug
+        //Debug 因为目前SharedPreferences还没保存
         UserData.setUsername("daidaijie");
         UserData.setPassword("password");
 
         if (UserData.getUsername().isEmpty() || UserData.getPassword().isEmpty()) {
+            //用户名或者密码为空
             loginState = LoginState.EMPTY_DATA;
             myHandler.sendEmptyMessage(0x1233);
         } else if (!StateUtil.isNetworkAvailable(this)) {
+            //无法连接到网络
             loginState = LoginState.NO_INTERNET;
             myHandler.sendEmptyMessage(0x1233);
         } else {
+            //新建一个线程来处理登录时间
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -117,23 +131,30 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 这里连接服务器判断密码是否正确
+     */
     private void login() {
-        //这里连接服务器判断密码是否正确
+//       新建post请求的数据
         RequestBody body = new FormEncodingBuilder()
                 .add("username", UserData.getUsername())
                 .add("password", UserData.getPassword())
                 .build();
 
+//      请求的URL
         String login_url = getString(R.string.login_url);
 
+//      创建请求
         Request request = new Request.Builder()
                 .url(login_url)
                 .post(body)
                 .build();
 
+//      用异步来进行网络请求，因为API23不允许直接在UI线程中进行网络操作
         Client.client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
+//              无法和服务器进行连接
                 loginState = LoginState.SERVER_ERROR;
                 myHandler.sendEmptyMessage(0x1233);
             }
@@ -142,13 +163,13 @@ public class SplashActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 String state = response.body().string();
                 if (state.equals("success")) {
-//                    登录成功
+//                  登录成功
                     loginState = LoginState.LOGIN_SUCCESS;
                 } else if (state.equals("fail")) {
-//                    登录失败，账号密码错误
+//                  登录失败，账号密码错误
                     loginState = LoginState.Login_ERROR;
                 } else {
-//                    服务器出现错误
+//                  服务器出现错误
                     loginState = LoginState.SERVER_ERROR;
                 }
                 myHandler.sendEmptyMessage(0x1233);

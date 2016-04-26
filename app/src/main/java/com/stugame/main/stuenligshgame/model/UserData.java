@@ -7,6 +7,7 @@ package com.stugame.main.stuenligshgame.model;
 public class UserData {
     private static String username;
     private static String password;
+    public static final String SALT = "STUdyEnglishGame";
 
     public static String getUsername() {
         return username;

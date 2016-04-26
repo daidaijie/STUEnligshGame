@@ -5,12 +5,14 @@ import com.squareup.okhttp.OkHttpClient;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 负责连接网络
  * Created by daidaijie on 2016/4/25.
  */
 public class Client {
     public static final OkHttpClient client = new OkHttpClient();
 
     static {
+//      设置最大访问时间为3s
         client.setConnectTimeout(3, TimeUnit.SECONDS);
     }
 }
