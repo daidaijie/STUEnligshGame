@@ -11,4 +11,8 @@
     <string name="no_internet">Your device don\'t connects to Internet </string>
     <string name="server_error">Can\'t connect to the server</string>
 
+    <!--drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>

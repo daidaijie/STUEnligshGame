@@ -1,23 +1,32 @@
 package com.stugame.main.stuenligshgame.view;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.MenuItem;
 
 import com.stugame.main.stuenligshgame.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    private final String TAG = this.getClass().getName();
+    private final String TAG = "Debug_" + this.getClass().getName();
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,55 @@ public class MainActivity extends AppCompatActivity {
 //      设置toolbar
         toolbar.setTitle(R.string.app_name);
 
+//      让toolbar替代actionBar
         setSupportActionBar(toolbar);
+
+//      添加toolbar drawer的开关
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+//      给drawerLayout添加监听器为toggle
+        drawerLayout.addDrawerListener(toggle);
+
+//      toggle同步状态
+        toggle.syncState();
+
+//      设置点击navigationView菜单事件
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //重写back键方法
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+        //点击后关闭drawerLayout
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
