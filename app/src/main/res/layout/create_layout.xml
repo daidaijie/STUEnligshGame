@@ -2,4 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Quiz"
+        android:id="@+id/create_quiz"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="209dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Survey"
+        android:id="@+id/create_survey"
+        android:layout_below="@+id/create_quiz"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp" />
 </RelativeLayout>
