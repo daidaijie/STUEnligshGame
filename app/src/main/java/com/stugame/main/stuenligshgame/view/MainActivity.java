@@ -9,13 +9,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.stugame.main.stuenligshgame.R;
 import com.stugame.main.stuenligshgame.adapter.MainViewPaperAdapter;
+import com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton;
+import com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +42,13 @@ public class MainActivity extends AppCompatActivity
 
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
+
+    @Bind(R.id.createQuizAction)
+    FloatingActionButton createQuizAction;
+    @Bind(R.id.createSurveyAction)
+    FloatingActionButton createSurveyAction;
+    @Bind(R.id.multiple_actions)
+    FloatingActionsMenu multipleActions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +95,26 @@ public class MainActivity extends AppCompatActivity
 //      修改两个Tab的文字
         tabLayout.getTabAt(0).setText("Create Question");
         tabLayout.getTabAt(1).setText("Answer Question");
+
+        containerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.d(TAG, "onPageSelected: " + position);
+                if(position==1){
+                    multipleActions.collapse();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -115,5 +148,19 @@ public class MainActivity extends AppCompatActivity
         //点击后关闭drawerLayout
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @OnClick({R.id.createQuizAction, R.id.createSurveyAction})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.createQuizAction:
+                Toast.makeText(this, "create Quiz", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.createSurveyAction:
+                Toast.makeText(this, "create Survey", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        multipleActions.collapse();
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -21,10 +22,37 @@
     </android.support.design.widget.AppBarLayout>
 
 
+    <!--需要设置behavior才能被支持-->
     <android.support.v4.view.ViewPager
         android:id="@+id/containerViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorPressed="@color/colorAccentPress"
+        fab:fab_labelStyle="@style/menu_labels_style">
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/createQuizAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="Create a quiz" />
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/createSurveyAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="Create a Survey" />
+    </com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

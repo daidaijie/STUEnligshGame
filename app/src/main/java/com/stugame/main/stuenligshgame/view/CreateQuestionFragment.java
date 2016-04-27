@@ -26,12 +26,7 @@ public class CreateQuestionFragment extends Fragment {
 
     @Bind(R.id.historyQuestionRecyclerView)
     RecyclerView historyQuestionRecyclerView;
-    @Bind(R.id.createQuizAction)
-    FloatingActionButton createQuizAction;
-    @Bind(R.id.createSurveyAction)
-    FloatingActionButton createSurveyAction;
-    @Bind(R.id.multiple_actions)
-    FloatingActionsMenu multipleActions;
+
     @Bind(R.id.historyQuestionRefreshLayout)
     SwipeRefreshLayout historyQuestionRefreshLayout;
 
@@ -94,19 +89,5 @@ public class CreateQuestionFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-    }
-
-    @OnClick({R.id.createQuizAction, R.id.createSurveyAction})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.createQuizAction:
-                Toast.makeText(getActivity(), "create Quiz", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.createSurveyAction:
-                Toast.makeText(getActivity(), "create Survey", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-        multipleActions.collapse();
     }
 }
