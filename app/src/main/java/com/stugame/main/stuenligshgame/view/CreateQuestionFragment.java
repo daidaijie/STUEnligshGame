@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import com.stugame.main.stuenligshgame.R;
 import com.stugame.main.stuenligshgame.adapter.HistoryQuestionRecyclerAdapter;
+import com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton;
+import com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CreateQuestionFragment extends Fragment {
 
@@ -21,6 +24,12 @@ public class CreateQuestionFragment extends Fragment {
 
     @Bind(R.id.historyQuestionRecyclerView)
     RecyclerView historyQuestionRecyclerView;
+    @Bind(R.id.createQuizAction)
+    FloatingActionButton createQuizAction;
+    @Bind(R.id.createSurveyAction)
+    FloatingActionButton createSurveyAction;
+    @Bind(R.id.multiple_actions)
+    FloatingActionsMenu multipleActions;
 
     public CreateQuestionFragment() {
         // Required empty public constructor
@@ -67,5 +76,19 @@ public class CreateQuestionFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick({R.id.createQuizAction, R.id.createSurveyAction})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.createQuizAction:
+                Toast.makeText(getActivity(), "create Quiz", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.createSurveyAction:
+                Toast.makeText(getActivity(), "create Survey", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        multipleActions.collapse();
     }
 }

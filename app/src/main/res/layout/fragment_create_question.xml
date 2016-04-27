@@ -1,9 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/holo_blue_bright"
+    android:orientation="vertical"
     tools:context=".view.CreateQuestionFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -13,4 +14,31 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+
+    <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorPressed="@color/colorAccentPress"
+        fab:fab_labelStyle="@style/menu_labels_style">
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/createQuizAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="Create a quiz" />
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/createSurveyAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="Create a Survey" />
+    </com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu>
+
+</FrameLayout>

@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SeeQuestionActivity" />
-        <activity android:name=".view.CreateQuizOrSurveyActivity" />
         <activity android:name=".view.LoginActivity">
 
         </activity>
