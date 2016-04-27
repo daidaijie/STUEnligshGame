@@ -1,7 +1,9 @@
 package com.stugame.main.stuenligshgame.view;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +32,8 @@ public class CreateQuestionFragment extends Fragment {
     FloatingActionButton createSurveyAction;
     @Bind(R.id.multiple_actions)
     FloatingActionsMenu multipleActions;
+    @Bind(R.id.historyQuestionRefreshLayout)
+    SwipeRefreshLayout historyQuestionRefreshLayout;
 
     public CreateQuestionFragment() {
         // Required empty public constructor
@@ -61,6 +65,20 @@ public class CreateQuestionFragment extends Fragment {
             @Override
             public void onItemLongClick(View view, int position) {
                 Toast.makeText(getActivity(), "Item " + position + " is  on long click", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //创建下拉刷新监听器
+        historyQuestionRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                         隐藏刷新条
+                        historyQuestionRefreshLayout.setRefreshing(false);
+                    }
+                },2000);
             }
         });
 
