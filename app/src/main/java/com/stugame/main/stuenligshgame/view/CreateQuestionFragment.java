@@ -73,7 +73,7 @@ public class CreateQuestionFragment extends Fragment {
 //                         隐藏刷新条
                         historyQuestionRefreshLayout.setRefreshing(false);
                     }
-                },2000);
+                }, 2000);
             }
         });
 

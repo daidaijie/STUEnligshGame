@@ -45,10 +45,19 @@ public class MainActivity extends AppCompatActivity
 
     @Bind(R.id.createQuizAction)
     FloatingActionButton createQuizAction;
+
     @Bind(R.id.createSurveyAction)
     FloatingActionButton createSurveyAction;
-    @Bind(R.id.multiple_actions)
-    FloatingActionsMenu multipleActions;
+
+    @Bind(R.id.createQuestionActions)
+    FloatingActionsMenu createQuestionActions;
+
+    @Bind(R.id.answerQuestionAction)
+    FloatingActionButton answerQuestionAction;
+
+    @Bind(R.id.createAnswerActions)
+    FloatingActionsMenu createAnswerActions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +108,21 @@ public class MainActivity extends AppCompatActivity
         containerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                createAnswerActions.collapse();
+                createQuestionActions.collapse();
             }
 
             @Override
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected: " + position);
-                if(position==1){
-                    multipleActions.collapse();
+                if (position == 0) {
+                    createAnswerActions.collapse();
+                    createAnswerActions.setVisibility(View.GONE);
+                    createQuestionActions.setVisibility(View.VISIBLE);
+                } else if (position == 1) {
+                    createQuestionActions.collapse();
+                    createQuestionActions.setVisibility(View.GONE);
+                    createAnswerActions.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -161,6 +177,11 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        multipleActions.collapse();
+        createQuestionActions.collapse();
+    }
+
+    @OnClick(R.id.answerQuestionAction)
+    public void onClick() {
+        createAnswerActions.collapse();
     }
 }

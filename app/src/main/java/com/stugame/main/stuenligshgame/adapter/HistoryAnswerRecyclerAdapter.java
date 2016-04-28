@@ -13,11 +13,11 @@ import com.stugame.main.stuenligshgame.R;
 /**
  * Created by daidaijie on 2016/4/26.
  */
-public class HistoryQuestionRecyclerAdapter extends RecyclerView.Adapter<HistoryQuestionRecyclerAdapter.MyViewHolder> {
+public class HistoryAnswerRecyclerAdapter extends RecyclerView.Adapter<HistoryAnswerRecyclerAdapter.MyViewHolder> {
 
     Activity activity;
 
-    public HistoryQuestionRecyclerAdapter(Activity activity) {
+    public HistoryAnswerRecyclerAdapter(Activity activity) {
         this.activity = activity;
     }
 
@@ -46,7 +46,7 @@ public class HistoryQuestionRecyclerAdapter extends RecyclerView.Adapter<History
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.historyAnswerInfoTextView.setText("Question item : " + position);
+        holder.historyAnswerInfoTextView.setText("Answer item : " + position);
 
         if (mOnItemClickLitener != null) {
             //设置点击事件
@@ -70,7 +70,7 @@ public class HistoryQuestionRecyclerAdapter extends RecyclerView.Adapter<History
 
     @Override
     public int getItemCount() {
-        return 20;
+        return 30;
     }
 
     //ViewHolder用于保存每一个子Item的数据

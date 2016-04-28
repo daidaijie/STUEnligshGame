@@ -30,7 +30,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
+        android:id="@+id/createQuestionActions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -55,4 +55,24 @@
             fab:fab_title="Create a Survey" />
     </com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu>
 
+
+    <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu
+        android:id="@+id/createAnswerActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorPressed="@color/colorAccentPress"
+        fab:fab_labelStyle="@style/menu_labels_style">
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/answerQuestionAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="Answer a question" />
+
+    </com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu>
 </android.support.design.widget.CoordinatorLayout>
