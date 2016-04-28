@@ -2,7 +2,7 @@
     <string name="app_name">STUdyEnligshGame</string>
 
     <!--url_string-->
-    <string name="login_url">http://10.21.29.148:5000/login</string>
+    <string name="login_url">http://10.21.29.149:5000/login</string>
 
     <!--login_info-->
     <string name="login_success">Login success</string>

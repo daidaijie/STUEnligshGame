@@ -38,8 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
     }
+
     @OnClick(R.id.loginButton)
     public void onClick() {
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
