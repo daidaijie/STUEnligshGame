@@ -32,6 +32,7 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Debug用的TAG
     private final String TAG = "Debug_" + this.getClass().getName();
 
     @Bind(R.id.toolbar)
@@ -127,14 +128,17 @@ public class MainActivity extends AppCompatActivity
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected: " + position);
                 //当切换页面的时候将该页对应的FAB菜单显示出来
+                //并将其Tab和ToolBar的颜色进行修改
                 if (position == 0) {
+                    //切换FAB按钮
                     createAnswerActions.collapse();
                     createAnswerActions.setVisibility(View.GONE);
                     createQuestionActions.setVisibility(View.VISIBLE);
 
-                    //加特技
+                    //加特技,设置分别为T
                     Animator animator = null;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                        圆形展开动画
                         animator = ViewAnimationUtils.createCircularReveal(tabLayout,
                                 tabLayout.getWidth() / 4,
                                 0,
@@ -151,12 +155,14 @@ public class MainActivity extends AppCompatActivity
                                 toolbar.getHeight(),
                                 0,
                                 toolbar.getWidth());
+                        //设置插值器，加速度
                         animator2.setInterpolator(new AccelerateDecelerateInterpolator());
                         animator2.setDuration(500);
                         animator2.start();
                         animator2.addListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationEnd(Animator animation) {
+                                //完成后修改底色
                                 mainAppBarLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                 super.onAnimationEnd(animation);
                             }
@@ -168,6 +174,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 } else if (position == 1) {
+                    //切换FAB按钮
                     createQuestionActions.collapse();
                     createQuestionActions.setVisibility(View.GONE);
                     createAnswerActions.setVisibility(View.VISIBLE);
@@ -218,7 +225,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        //重写back键方法
+        //重写back键方法,如果drawerLayout打开则将其关闭,否则进行默认的操作
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
