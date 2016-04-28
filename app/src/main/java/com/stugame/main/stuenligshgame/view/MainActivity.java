@@ -1,8 +1,10 @@
 package com.stugame.main.stuenligshgame.view;
 
 import android.animation.Animator;
-import android.graphics.Color;
+import android.animation.AnimatorListenerAdapter;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity
 
     @Bind(R.id.createAnswerActions)
     FloatingActionsMenu createAnswerActions;
+
+    @Bind(R.id.mainAppBarLayout)
+    AppBarLayout mainAppBarLayout;
 
 
     @Override
@@ -129,17 +134,37 @@ public class MainActivity extends AppCompatActivity
 
                     //加特技
                     Animator animator = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         animator = ViewAnimationUtils.createCircularReveal(tabLayout,
                                 tabLayout.getWidth() / 4,
-                                tabLayout.getHeight() / 2,
+                                0,
                                 0,
                                 tabLayout.getWidth());
                         animator.setInterpolator(new AccelerateDecelerateInterpolator());
                         animator.setDuration(500);
                         animator.start();
                     }
-                    tabLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
+                    Animator animator2 = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        animator2 = ViewAnimationUtils.createCircularReveal(toolbar,
+                                toolbar.getWidth() / 4,
+                                toolbar.getHeight(),
+                                0,
+                                toolbar.getWidth());
+                        animator2.setInterpolator(new AccelerateDecelerateInterpolator());
+                        animator2.setDuration(500);
+                        animator2.start();
+                        animator2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                mainAppBarLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                super.onAnimationEnd(animation);
+                            }
+                        });
+                        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                    }
+                    tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
 
                 } else if (position == 1) {
@@ -149,17 +174,38 @@ public class MainActivity extends AppCompatActivity
 
                     //加特技
                     Animator animator = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         animator = ViewAnimationUtils.createCircularReveal(tabLayout,
                                 tabLayout.getWidth() * 3 / 4,
-                                tabLayout.getHeight() / 2,
+                                0,
                                 0,
                                 tabLayout.getWidth());
                         animator.setInterpolator(new AccelerateDecelerateInterpolator());
                         animator.setDuration(500);
                         animator.start();
                     }
+                    Animator animator2 = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        animator2 = ViewAnimationUtils.createCircularReveal(toolbar,
+                                toolbar.getWidth() * 3 / 4,
+                                toolbar.getHeight(),
+                                0,
+                                toolbar.getWidth());
+                        animator2.setInterpolator(new AccelerateDecelerateInterpolator());
+                        animator2.setDuration(500);
+                        animator2.start();
+                        animator2.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                mainAppBarLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
+                                super.onAnimationEnd(animation);
+                            }
+                        });
+                        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark2));
+                    }
+                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
                     tabLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
+
                 }
             }
 
