@@ -1,5 +1,7 @@
 package com.stugame.main.stuenligshgame.view;
 
+import android.animation.Animator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import com.stugame.main.stuenligshgame.R;
@@ -105,9 +109,11 @@ public class MainActivity extends AppCompatActivity
         tabLayout.getTabAt(0).setText("Create Question");
         tabLayout.getTabAt(1).setText("Answer Question");
 
+//      当ViewPager页面改变的时候切换的时候改变状态
         containerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //当滑动页面的时候收起FAB菜单
                 createAnswerActions.collapse();
                 createQuestionActions.collapse();
             }
@@ -115,14 +121,45 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected: " + position);
+                //当切换页面的时候将该页对应的FAB菜单显示出来
                 if (position == 0) {
                     createAnswerActions.collapse();
                     createAnswerActions.setVisibility(View.GONE);
                     createQuestionActions.setVisibility(View.VISIBLE);
+
+                    //加特技
+                    Animator animator = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        animator = ViewAnimationUtils.createCircularReveal(tabLayout,
+                                tabLayout.getWidth() / 4,
+                                tabLayout.getHeight() / 2,
+                                0,
+                                tabLayout.getWidth());
+                        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                        animator.setDuration(500);
+                        animator.start();
+                    }
+                    tabLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
+
+
                 } else if (position == 1) {
                     createQuestionActions.collapse();
                     createQuestionActions.setVisibility(View.GONE);
                     createAnswerActions.setVisibility(View.VISIBLE);
+
+                    //加特技
+                    Animator animator = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        animator = ViewAnimationUtils.createCircularReveal(tabLayout,
+                                tabLayout.getWidth() * 3 / 4,
+                                tabLayout.getHeight() / 2,
+                                0,
+                                tabLayout.getWidth());
+                        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                        animator.setDuration(500);
+                        animator.start();
+                    }
+                    tabLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
                 }
             }
 
@@ -168,6 +205,7 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick({R.id.createQuizAction, R.id.createSurveyAction})
     public void onClick(View view) {
+        //这里之后会改回切换界面
         switch (view.getId()) {
             case R.id.createQuizAction:
                 Toast.makeText(this, "create Quiz", Toast.LENGTH_SHORT).show();
@@ -176,12 +214,16 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "create Survey", Toast.LENGTH_SHORT).show();
                 break;
         }
-
+        //点击完之后收起FAB菜单
         createQuestionActions.collapse();
     }
 
     @OnClick(R.id.answerQuestionAction)
     public void onClick() {
+        //这里之后会改回切换界面
+        Toast.makeText(this, "answer question", Toast.LENGTH_SHORT).show();
+
+        //点击完之后收起FAB菜单
         createAnswerActions.collapse();
     }
 }
