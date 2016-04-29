@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @Bind(R.id.loginButton)
     Button loginButton;
+    @Bind(R.id.RegisterButton)
+    Button RegisterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.loginButton)
-    public void onClick() {
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-    }
-
-    @Override
-    public void onBackPressed() {
-
+    @OnClick({R.id.loginButton, R.id.RegisterButton})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.loginButton:
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                break;
+            case R.id.RegisterButton:
+                break;
+        }
     }
 }

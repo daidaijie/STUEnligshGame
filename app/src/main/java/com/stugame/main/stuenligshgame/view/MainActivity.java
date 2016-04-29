@@ -2,6 +2,8 @@ package com.stugame.main.stuenligshgame.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -261,7 +263,21 @@ public class MainActivity extends AppCompatActivity
         //这里之后会改回切换界面
         switch (view.getId()) {
             case R.id.createQuizAction:
-                Toast.makeText(this, "create Quiz", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "create Quiz", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, CreateQuizActivity.class);
+
+                startActivity(intent);
+
+                //假如API大于anderoid5.0，就进行转场动画，否则普通转场
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
+                            this,
+                            createQuestionActions,
+                            "createQuizContentTransition"
+                    ).toBundle());
+                } else {
+                    startActivity(intent);
+                }*/
                 break;
             case R.id.createSurveyAction:
                 Toast.makeText(this, "create Survey", Toast.LENGTH_SHORT).show();
