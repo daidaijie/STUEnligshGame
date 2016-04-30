@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,16 +12,43 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <include layout="@layout/base_toolbar" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/createQuizTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
 
-    <LinearLayout
-        android:id="@+id/createQuizContentLayout"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/createQuizViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </LinearLayout>
+    </android.support.v4.view.ViewPager>
 
+
+    <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu
+        android:id="@+id/motifyQuizActionsMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_actions_spacing">
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/addQuizAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionButton
+            android:id="@+id/deleteQuizAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </com.stugame.main.stuenligshgame.component.floatingActionButton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

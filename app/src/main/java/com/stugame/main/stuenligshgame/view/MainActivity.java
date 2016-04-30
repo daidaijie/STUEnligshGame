@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity
     AppBarLayout mainAppBarLayout;
 
 
+    MainViewPaperAdapter mainViewPaperAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,11 +106,13 @@ public class MainActivity extends AppCompatActivity
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
         }
+
     }
 
     private void setTabAndPager() {
 //        为containerViewPager设置ViewPaperAdapter
-        containerViewPager.setAdapter(new MainViewPaperAdapter(getSupportFragmentManager()));
+        mainViewPaperAdapter = new MainViewPaperAdapter(getSupportFragmentManager());
+        containerViewPager.setAdapter(mainViewPaperAdapter);
 
 //      设置tabLayout关联containerViewPager
         tabLayout.setupWithViewPager(containerViewPager);
@@ -116,6 +120,7 @@ public class MainActivity extends AppCompatActivity
 //      修改两个Tab的文字
         tabLayout.getTabAt(0).setText("Create Question");
         tabLayout.getTabAt(1).setText("Answer Question");
+
 
 //      当ViewPager页面改变的时候切换的时候改变状态
         containerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

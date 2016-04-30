@@ -20,4 +20,6 @@
     <color name="colorPrimaryDark2">#c26800</color>
 
 
+    <color name="createQuestionBackgroundColor">#424242</color>
+
 </resources>
