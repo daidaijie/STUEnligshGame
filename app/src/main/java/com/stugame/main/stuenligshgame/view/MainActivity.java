@@ -178,6 +178,8 @@ public class MainActivity extends AppCompatActivity
                     }
                     tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    drawerLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
 
                 } else if (position == 1) {
@@ -211,14 +213,15 @@ public class MainActivity extends AppCompatActivity
                         animator2.addListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationEnd(Animator animation) {
-                                mainAppBarLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
+                                mainAppBarLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
                                 super.onAnimationEnd(animation);
                             }
                         });
                         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark2));
                     }
-                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
-                    tabLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+                    tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+                    navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
 
                 }
             }

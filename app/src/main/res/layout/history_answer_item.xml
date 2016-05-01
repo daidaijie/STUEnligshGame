@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/mainBackgroundColor2"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -8,10 +9,10 @@
         android:id="@+id/historyAnswerCardView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="8dp">
+        app:cardCornerRadius="2dp"
+        app:cardElevation="1dp">
 
         <TextView
             android:id="@+id/historyAnswerInfoTextView"

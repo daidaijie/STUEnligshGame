@@ -60,6 +60,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     }
 
     private void setViewPager() {
+        //设置ViewPager属性
         createQuizViewPaperAdapter = new CreateQuizViewPaperAdapter(getSupportFragmentManager());
         createQuizViewPager.setAdapter(createQuizViewPaperAdapter);
         createQuizTabLayout.setupWithViewPager(createQuizViewPager);
@@ -79,6 +80,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            //判断是返回键然后退出当前Activity
             finish();
             return true;
         }
@@ -98,14 +100,10 @@ public class CreateQuizActivity extends AppCompatActivity {
             case R.id.deleteQuizAction:
                 //只能删除剩最后一个
                 if (createQuizViewPaperAdapter.getCount() > 1) {
-                    createQuizViewPaperAdapter.deleteFragmentItem(currentItem);
                     createQuizViewPager.setCurrentItem(currentItem - 1);
+                    createQuizViewPaperAdapter.deleteFragmentItem(currentItem);
                 }
                 break;
-        }
-        //重新设置标题,不知道从当前开始为什么会有bug
-        for (int i = 0; i < createQuizViewPaperAdapter.getCount(); i++) {
-            createQuizTabLayout.getTabAt(i).setText("Question:" + i);
         }
     }
 }
